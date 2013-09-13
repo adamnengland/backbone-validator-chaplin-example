@@ -12,6 +12,14 @@ module.exports = class FormView extends View
     super
     @model = new Form()
 
+  attach: ->
+    super
+    Backbone.Validation.bind(@);
+
   validate: (e) ->
-    @model.validate()
+    @model.set
+      'name' : @$el.find('.name').val()
+      'email' : @$el.find('.email').val()
+      'phone' : @$el.find('.phone').val()
+    console.log @model.validate()
     e.preventDefault()
